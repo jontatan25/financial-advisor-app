@@ -1,6 +1,6 @@
 <template>
   <div class="flex justify-between mb-8">
-    <div class="w-custom-544 h-48 pt-6 pb-8 px-8 border rounded-lg shadow-lg flex justify-between">
+    <div class="w-custom-544 h-48 pt-6 pb-8 px-8  border-custom-1 border-custom-white rounded-3xl shadow-lg flex justify-between bg-white">
       <div class="pt-custom-14 total-value flex flex-col justify-between h-full">
         <h3 class="text-xl font-medium text-secondary">Total Asset Value</h3>
         <p class="text-5xl font-medium">€125,760</p>
@@ -11,7 +11,7 @@
         <p class="text-xl text-green-700 font-medium">+€11,050 today</p>
       </div>
     </div>
-    <div class="w-custom-544 h-48 pt-6 pb-8 px-8 border rounded-lg shadow-lg flex justify-between">
+    <div class="w-custom-544 h-48 pt-6 pb-8 px-8  border-custom-1 border-custom-white rounded-3xl shadow-lg flex justify-between bg-white">
       <div class="pt-custom-14 total-value flex flex-col justify-between h-full">
         <h3 class="text-xl font-medium text-secondary">Total Profits</h3>
         <p class="text-5xl font-medium">€25,760</p>
@@ -25,7 +25,7 @@
         </div>
       </div>
     </div>
-    <div class="w-custom-544 h-48 pt-6 pb-8 px-8 border rounded-lg shadow-lg flex justify-between">
+    <div class="w-custom-544 h-48 pt-6 pb-8 px-8  border-custom-1 border-custom-white rounded-3xl shadow-lg flex justify-between bg-white">
       <div class="pt-custom-14 total-value flex flex-col justify-between h-full">
         <h3 class="text-xl font-medium text-secondary">Brief Summary</h3>
         <div class="flex">

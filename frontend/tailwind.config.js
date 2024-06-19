@@ -20,12 +20,23 @@ export default {
         secondary: '#667085', // gris
         ternary: '#98A2B3', //gris suave
         accent: '#475467', // gris oscuro
+        riwhite: '#FCFAFF' //background white
       },
       width: {
-        'custom-544': '544px'
+        'custom-544': '544px',
+        'custom-400': '400px'
+      },
+      height: {
+        'custom-460': '460px'
       },
       padding: {
         'custom-14': '14px'
+      },
+      borderColor: {
+        'custom-white': '#E9E9E9'
+      },
+      borderWidth: {
+        'custom-1': '1px'
       }
     }
   },
