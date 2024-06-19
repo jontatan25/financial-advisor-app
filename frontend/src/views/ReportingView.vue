@@ -1,21 +1,24 @@
 <template>
-  <div class="reporting-component">
-    <h2>Componente de Reporting</h2>
-    <!-- Aquí va el contenido del reporting -->
+  <div class="mx-28">
+    <div class="h-20 flex justify-between items-center mt-16 mb-12">
+      <div>
+        <p class="font-medium text-custom-40 leading-custom-48">Welcome, Jonathan</p>
+        <p class="font-medium text-custom-24 text-ternary">
+          Here’s an update of your assets today - Jun 19, 2024
+        </p>
+      </div>
+
+      <button class="flex items-center bg-primary px-9 rounded-lg h-16">
+        <p class="mr-2 text-white">&#10230;</p>
+        <p class="text-white text-xl font-semibold">Download Report</p>
+      </button>
+    </div>
+    <OverviewComponent />
   </div>
 </template>
 
-<script>
-export default {
-  // Puedes agregar propiedades, métodos y datos según sea necesario
-}
+<script setup>
+import OverviewComponent from '@/components/OverviewComponent.vue'
 </script>
 
-<style scoped>
-.reporting-component {
-  margin: 20px;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-</style>
+<style scoped></style>
