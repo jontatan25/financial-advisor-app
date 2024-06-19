@@ -16,7 +16,7 @@
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 import ChartDataLabels from 'chartjs-plugin-datalabels'
 import { Doughnut } from 'vue-chartjs'
-import * as chartConfig from './chartConfig.js'
+import * as chartConfig from './chartconfig/currency.js'
 
 ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels)
 

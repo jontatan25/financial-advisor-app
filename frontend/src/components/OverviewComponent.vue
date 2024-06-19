@@ -1,6 +1,8 @@
 <template>
   <div class="flex justify-between mb-8">
-    <div class="w-custom-544 h-48 pt-6 pb-8 px-8  border-custom-1 border-custom-white rounded-3xl shadow-lg flex justify-between bg-white">
+    <div
+      class="w-custom-544 h-48 pt-6 pb-8 px-8 border-custom-1 border-custom-white rounded-3xl shadow-lg flex justify-between bg-white"
+    >
       <div class="pt-custom-14 total-value flex flex-col justify-between h-full">
         <h3 class="text-xl font-medium text-secondary">Total Asset Value</h3>
         <p class="text-5xl font-medium">€125,760</p>
@@ -11,7 +13,9 @@
         <p class="text-xl text-green-700 font-medium">+€11,050 today</p>
       </div>
     </div>
-    <div class="w-custom-544 h-48 pt-6 pb-8 px-8  border-custom-1 border-custom-white rounded-3xl shadow-lg flex justify-between bg-white">
+    <div
+      class="w-custom-544 h-48 pt-6 pb-8 px-8 border-custom-1 border-custom-white rounded-3xl shadow-lg flex justify-between bg-white"
+    >
       <div class="pt-custom-14 total-value flex flex-col justify-between h-full">
         <h3 class="text-xl font-medium text-secondary">Total Profits</h3>
         <p class="text-5xl font-medium">€25,760</p>
@@ -25,7 +29,9 @@
         </div>
       </div>
     </div>
-    <div class="w-custom-544 h-48 pt-6 pb-8 px-8  border-custom-1 border-custom-white rounded-3xl shadow-lg flex justify-between bg-white">
+    <div
+      class="w-custom-544 h-48 pt-6 pb-8 px-8 border-custom-1 border-custom-white rounded-3xl shadow-lg flex justify-between bg-white"
+    >
       <div class="pt-custom-14 total-value flex flex-col justify-between h-full">
         <h3 class="text-xl font-medium text-secondary">Brief Summary</h3>
         <div class="flex">
@@ -41,14 +47,6 @@
       <div class="flex flex-col justify-between items-end h-full">
         <div class="rounded-2xl w-14 h-14 bg-yellow-500"></div>
       </div>
-      <!-- <div class="total-profits mt-4">
-      <h3 class="text-xl font-bold">Total Profits</h3>
-      <p class="text-2xl">{{ totalProfits }}</p>
-    </div>
-    <div class="brief-summary mt-4">
-      <h3 class="text-xl font-bold">Brief Summary</h3>
-      <p>{{ summary }}</p>
-    </div> -->
     </div>
   </div>
 </template>
@@ -71,10 +69,3 @@ defineProps({
   }
 })
 </script>
-
-<style scoped>
-.overview-component {
-  max-width: 400px;
-  background-color: #fff;
-}
-</style>

@@ -14,14 +14,18 @@
       </button>
     </div>
     <OverviewComponent />
-    <CurrencyChart />
-    <div class="flex"></div>
+
+    <div class="flex">
+      <CurrencyChart />
+      <InvestmentChart />
+    </div>
   </div>
 </template>
 
 <script setup>
 import OverviewComponent from '@/components/OverviewComponent.vue'
 import CurrencyChart from '@/components/CurrencyChart.vue'
+import InvestmentChart from '@/components/InvestmentChart.vue'
 </script>
 
 <style scoped></style>
