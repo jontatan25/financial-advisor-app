@@ -2,24 +2,24 @@ export const data = {
     labels: ['Stocks', 'Bonds', 'Real Estate', 'Mutual Funds'],
     datasets: [
       {
-        label: 'Bank A',
+        label: 'rothschildmartinmaurel',
         backgroundColor: '#f87979',
         borderRadius: 8,
         data: [220, 280, 450, 330]
       },
       {
-        label: 'Bank B',
+        label: 'santander-e',
         backgroundColor: '#22CAAD',
         borderRadius: 8,
         data: [180, 230, 400, 300]
       },
       {
-        label: 'Bank C',
+        label: 'caixabank',
         backgroundColor: '#3872FF',
         borderRadius: 8,
         data: [240, 260, 420, 350]
       }
-    ]
+    ] 
   };
   
   export const options = {
@@ -55,4 +55,3 @@ export const data = {
       },
     },
   };
-  
