@@ -16,11 +16,16 @@ export default {
         'custom-48': '48px'
       },
       colors: {
-        primary: '#3872FF', // Azul
-        secondary: '#667085', // gris
-        ternary: '#98A2B3', //gris suave
-        accent: '#475467', // gris oscuro
-        riwhite: '#FCFAFF' //background white
+        primary: '#3872FF', // Blue
+        secondary: '#667085', // grey
+        ternary: '#98A2B3', // light grey
+        accent: '#475467', // dark grey
+        riwhite: '#FCFAFF', // background white
+        ripurple: '#6941C6', // table amount purple
+        risuccess: '#027A48', // green success
+        ridanger: '#FF5733', // danger red
+        ridarktext: '#1D2939', //dark grey text
+        ritableheader: '#FCFCFD', // table header bg
       },
       width: {
         'custom-544': '544px',
@@ -34,7 +39,8 @@ export default {
         'custom-14': '14px'
       },
       borderColor: {
-        'custom-white': '#E9E9E9'
+        'custom-white': '#E9E9E9',
+        'ritableheaderborder': '#EAECF0' // table border
       },
       borderWidth: {
         'custom-1': '1px'

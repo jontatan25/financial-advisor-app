@@ -15,11 +15,12 @@
     </div>
     <OverviewComponent />
 
-    <div class="flex justify-between">
+    <div class="mb-8 flex justify-between">
       <CurrencyChart :loading="loading" :assets="assets" />
       <InvestmentChart :loading="loading" :assets="assets" />
-      <InstitutionChart :loading="loading" :assets="assets"/>
+      <InstitutionChart :loading="loading" :assets="assets" />
     </div>
+    <TableComponent :loading="loading" :assets="assets" />
   </div>
 </template>
 
@@ -30,6 +31,7 @@ import CurrencyChart from '@/components/CurrencyChart.vue'
 import OverviewComponent from '@/components/OverviewComponent.vue'
 import InvestmentChart from '@/components/InvestmentChart.vue'
 import InstitutionChart from '@/components/InstitutionChart.vue'
+import TableComponent from '@/components/TableComponent.vue'
 
 const assets = ref([])
 const loading = ref(false)
