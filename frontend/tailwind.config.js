@@ -24,7 +24,8 @@ export default {
       },
       width: {
         'custom-544': '544px',
-        'custom-400': '400px'
+        'custom-400': '400px',
+        'custom-832': '832px'
       },
       height: {
         'custom-460': '460px'

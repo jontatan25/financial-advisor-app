@@ -1,10 +1,12 @@
 <template>
   <div
-    class="p-8 w-custom-400 h-custom-460 border-custom-1 border-custom-white rounded-3xl bg-white flex flex-col"
+    class="p-8 w-custom-832 h-custom-460 border-custom-1 border-custom-white rounded-3xl bg-white flex flex-col"
   >
     <div class="mb-7">
-      <h3 class="mb-2 font-semibold text-2xl text-accent">By Type of Investment</h3>
-      <p class="font-medium text-lg leading-7 text-ternary">Assets grouped by investment type</p>
+      <h3 class="mb-2 font-semibold text-2xl text-accent">By Financial Institution</h3>
+      <p class="font-medium text-lg leading-7 text-ternary">
+        Assets grouped by financial institution
+      </p>
     </div>
     <div class="grow">
       <Bar :data="data" :options="options" />
@@ -23,12 +25,12 @@ import {
   LinearScale
 } from 'chart.js'
 import { Bar } from 'vue-chartjs'
-import * as chartConfig from './chartconfig/investment.ts'
+import * as chartConfig from './chartconfig/institution.ts'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
 export default {
-  name: 'App',
+  name: 'InvestmentChart',
   components: {
     Bar
   },

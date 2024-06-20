@@ -4,6 +4,7 @@ export const data = {
   datasets: [
     {
       backgroundColor: ['#f87979', '#22CAAD', '#3872FF', '#FFD700'],
+      borderRadius: 8,
       data: [220, 280, 450, 330]
     }
   ]

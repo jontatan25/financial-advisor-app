@@ -15,9 +15,10 @@
     </div>
     <OverviewComponent />
 
-    <div class="flex">
+    <div class="flex justify-between">
       <CurrencyChart />
       <InvestmentChart />
+      <InstitutionChart />
     </div>
   </div>
 </template>
@@ -26,6 +27,7 @@
 import OverviewComponent from '@/components/OverviewComponent.vue'
 import CurrencyChart from '@/components/CurrencyChart.vue'
 import InvestmentChart from '@/components/InvestmentChart.vue'
+import InstitutionChart from '@/components/InstitutionChart.vue'
 </script>
 
 <style scoped></style>
