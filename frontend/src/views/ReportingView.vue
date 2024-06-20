@@ -16,7 +16,7 @@
     <OverviewComponent />
 
     <div class="flex justify-between">
-      <CurrencyChart />
+      <CurrencyChart :loading="loading" :assets="assets" />
       <InvestmentChart />
       <InstitutionChart />
     </div>
@@ -24,10 +24,29 @@
 </template>
 
 <script setup>
-import OverviewComponent from '@/components/OverviewComponent.vue'
+import { ref, onMounted } from 'vue'
+import axios from 'axios'
 import CurrencyChart from '@/components/CurrencyChart.vue'
+import OverviewComponent from '@/components/OverviewComponent.vue'
 import InvestmentChart from '@/components/InvestmentChart.vue'
 import InstitutionChart from '@/components/InstitutionChart.vue'
-</script>
 
-<style scoped></style>
+const assets = ref([])
+const loading = ref(false)
+
+const fetchData = async () => {
+  loading.value = true
+  try {
+    const response = await axios.get(import.meta.env.VITE_API_URL)
+    assets.value = response.data
+  } catch (error) {
+    console.error('Error fetching data:', error)
+  } finally {
+    loading.value = false
+  }
+}
+
+onMounted(() => {
+  fetchData()
+})
+</script>

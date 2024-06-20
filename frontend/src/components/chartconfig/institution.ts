@@ -1,4 +1,3 @@
-// chartconfig/investment.js
 export const data = {
     labels: ['Stocks', 'Bonds', 'Real Estate', 'Mutual Funds'],
     datasets: [

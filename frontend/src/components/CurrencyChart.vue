@@ -7,20 +7,25 @@
       <p class="font-medium text-lg leading-7 text-ternary">Assets grouped by currency</p>
     </div>
     <div class="grow">
-      <Doughnut v-if="loaded" :data="chartData" :options="chartOptions" />
-      <p v-else>Loading...</p>
+      <Doughnut v-if="!loading && loaded" :data="chartData" :options="chartOptions" />
+      <p v-else-if="loading">Loading...</p>
+      <p v-else>No data available</p>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, watch } from 'vue'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 import ChartDataLabels from 'chartjs-plugin-datalabels'
 import { Doughnut } from 'vue-chartjs'
-import axios from 'axios'
 
 ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels)
+
+const props = defineProps<{
+  loading: boolean
+  assets: Array<object>
+}>()
 
 const loaded = ref(false)
 const chartData = ref({
@@ -32,6 +37,7 @@ const chartData = ref({
     }
   ]
 })
+
 const chartOptions = {
   responsive: true,
   maintainAspectRatio: false,
@@ -51,45 +57,42 @@ const chartOptions = {
   }
 }
 
-const fetchData = async () => {
+// Watch for changes in assets prop and update chartData
+watch(
+  () => props.assets,
+  (newVal) => {
+    updateChartData(newVal)
+  }
+)
+
+const updateChartData = (data) => {
   loaded.value = false
 
-  try {
-    const response = await axios.get('http://localhost:3000/api/data')
-    const data = response.data
+  // Initialize totals for each currency
+  let totalEUR = 0
+  let totalUSD = 0
+  let totalGBP = 0
 
-    // Initialize totals for each currency
-    let totalEUR = 0
-    let totalUSD = 0
-    let totalGBP = 0
+  // Calculate totals for each currency
+  data.forEach((item) => {
+    switch (item.currency) {
+      case 'EUR':
+        totalEUR += item.balance
+        break
+      case 'USD':
+        totalUSD += item.balance
+        break
+      case 'GBP':
+        totalGBP += item.balance
+        break
+      default:
+        break
+    }
+  })
 
-    // Calculate totals for each currency
-    data.forEach((item) => {
-      switch (item.currency) {
-        case 'EUR':
-          totalEUR += item.balance
-          break
-        case 'USD':
-          totalUSD += item.balance
-          break
-        case 'GBP':
-          totalGBP += item.balance
-          break
-        default:
-          break
-      }
-    })
+  // Update chart data with calculated totals
+  chartData.value.datasets[0].data = [totalEUR, totalUSD, totalGBP]
 
-    // Update chart data with calculated totals
-    chartData.value.datasets[0].data = [totalEUR, totalUSD, totalGBP]
-
-    loaded.value = true
-  } catch (error) {
-    console.error('Error fetching data:', error)
-  }
+  loaded.value = true
 }
-
-onMounted(() => {
-  fetchData()
-})
 </script>

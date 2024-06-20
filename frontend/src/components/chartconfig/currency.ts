@@ -1,8 +1,5 @@
-// chartConfig.js
-
-
 export const data = {
-    labels: ['EUR(€)', 'USD($)', 'GBP'],
+    labels: ['EUR(€)', 'USD($)', 'GBP($)'],
     datasets: [
         {
             backgroundColor: ['#0D192C', '#22CAAD', '#3872FF'],
