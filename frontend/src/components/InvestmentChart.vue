@@ -27,7 +27,6 @@ import {
   ArcElement
 } from 'chart.js'
 import { Bar } from 'vue-chartjs'
-
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement)
 
 const props = defineProps<{

@@ -18,7 +18,7 @@
     <div class="flex justify-between">
       <CurrencyChart :loading="loading" :assets="assets" />
       <InvestmentChart :loading="loading" :assets="assets" />
-      <InstitutionChart />
+      <InstitutionChart :loading="loading" :assets="assets"/>
     </div>
   </div>
 </template>
