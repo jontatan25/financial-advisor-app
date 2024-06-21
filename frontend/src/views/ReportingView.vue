@@ -4,7 +4,7 @@
       <div>
         <p class="font-medium text-custom-40 leading-custom-48">Welcome, Jonathan</p>
         <p class="font-medium text-custom-24 text-ternary">
-          Here’s an update of your assets today - Jun 19, 2024
+          Here’s an update of your assets today - {{ currentDate }}
         </p>
       </div>
 
@@ -13,7 +13,7 @@
         <p class="text-white text-xl font-semibold">Download Report</p>
       </button>
     </div>
-    <OverviewComponent />
+    <OverviewComponent :loading="loading" :assets="assets" />
 
     <div class="mb-8 flex justify-between">
       <CurrencyChart :loading="loading" :assets="assets" />
@@ -25,7 +25,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import axios from 'axios'
 import CurrencyChart from '@/components/CurrencyChart.vue'
 import OverviewComponent from '@/components/OverviewComponent.vue'
@@ -50,5 +50,11 @@ const fetchData = async () => {
 
 onMounted(() => {
   fetchData()
+})
+
+const currentDate = computed(() => {
+  const date = new Date()
+  const options = { year: 'numeric', month: 'short', day: 'numeric' }
+  return date.toLocaleDateString('en-US', options)
 })
 </script>
