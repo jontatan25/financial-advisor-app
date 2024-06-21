@@ -9,7 +9,7 @@
       </div>
 
       <div class="flex flex-col justify-between items-end h-full">
-        <div class="rounded-2xl w-14 h-14 bg-primary"></div>
+        <div class="rounded-2xl w-14 h-14 flex justify-center items-center bg-primary"><WalletIcon /></div>
         <!-- Daily change/loss to be implemented -->
         <p class="text-xl text-green-700 font-medium">+€11,050 today</p>
       </div>
@@ -23,7 +23,7 @@
       </div>
 
       <div class="flex flex-col justify-between items-end h-full">
-        <div class="rounded-2xl w-14 h-14 bg-emerald-400"></div>
+        <div class="rounded-2xl w-14 h-14 flex justify-center items-center bg-emerald-400"><PlantIcon /></div>
         <div class="flex">
           <p :class="percentageChangeClass" class="mr-3 text-xl font-medium">
             {{ formattedPercentageChange }}
@@ -47,7 +47,7 @@
       </div>
 
       <div class="flex flex-col justify-between items-end h-full">
-        <div class="rounded-2xl w-14 h-14 bg-yellow-500"></div>
+        <div class="rounded-2xl w-14 h-14 flex justify-center items-center bg-riyellow"><SheetIcon /></div>
       </div>
     </div>
   </div>
@@ -55,6 +55,9 @@
 
 <script setup>
 import { defineProps, computed } from 'vue'
+import PlantIcon from '@/components/icons/PlantIcon.vue'
+import WalletIcon from '@/components/icons/WalletIcon.vue'
+import SheetIcon from '@/components/icons/SheetIcon.vue'
 
 const props = defineProps({
   loading: {

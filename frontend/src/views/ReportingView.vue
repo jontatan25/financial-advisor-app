@@ -8,8 +8,8 @@
         </p>
       </div>
 
-      <button class="flex items-center bg-primary px-9 rounded-lg h-16">
-        <p class="mr-2 text-white">&#10230;</p>
+      <button class="flex items-center bg-primary px-8 rounded-lg h-16">
+        <p class="mr-3 text-white"><DownloadIcon /></p>
         <p class="text-white text-xl font-semibold">Download Report</p>
       </button>
     </div>
@@ -32,6 +32,7 @@ import OverviewComponent from '@/components/OverviewComponent.vue'
 import InvestmentChart from '@/components/InvestmentChart.vue'
 import InstitutionChart from '@/components/InstitutionChart.vue'
 import TableComponent from '@/components/TableComponent.vue'
+import DownloadIcon from '@/components/icons/DownloadIcon.vue'
 
 const assets = ref([])
 const loading = ref(false)

@@ -22,7 +22,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import INClogo from '@/components/LogoIcon.vue'
+import INClogo from '@/components/icons/LogoIcon.vue'
 
 defineProps({
   isLoggedIn: {

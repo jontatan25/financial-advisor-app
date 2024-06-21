@@ -26,6 +26,7 @@ export default {
         ridanger: '#FF5733', // danger red
         ridarktext: '#1D2939', //dark grey text
         ritableheader: '#FCFCFD', // table header bg
+        riyellow: '#F5BC00', // table header bg
       },
       width: {
         'custom-544': '544px',
