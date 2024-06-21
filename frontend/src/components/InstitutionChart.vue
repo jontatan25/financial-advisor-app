@@ -47,25 +47,25 @@ const chartData = ref({
       data: []
     },
     {
-      label: 'F',
+      label: 'Futures',
       backgroundColor: '#22CAAD',
       borderRadius: 8,
       data: []
     },
     {
-      label: 'FI',
+      label: 'Fixed Income',
       backgroundColor: '#3872FF',
       borderRadius: 8,
       data: []
     },
     {
-      label: 'O',
+      label: 'Options',
       backgroundColor: '#FFD700',
       borderRadius: 8,
       data: []
     },
     {
-      label: 'VI',
+      label: 'Variable Income',
       backgroundColor: '#FF5733',
       borderRadius: 8,
       data: []

@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import PlanetChart from '@/components/PlanetChart.vue'
+import { RouterView } from 'vue-router'
 import NavComponent from '@/components/NavComponent.vue'
 import FooterComponent from '@/components/FooterComponent.vue'
 </script>
@@ -8,7 +7,7 @@ import FooterComponent from '@/components/FooterComponent.vue'
 <template>
   <div class="flex flex-col min-h-screen bg-riwhite">
     <header>
-      <NavComponent :isLoggedIn=true />
+      <NavComponent :isLoggedIn="true" />
     </header>
     <main class="flex-1">
       <RouterView />

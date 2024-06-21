@@ -11,17 +11,17 @@
       </div>
       <div v-if="isLoggedIn" class="flex">
         <div class="flex flex-col mr-4 items-end">
-          <p class="font-medium text-lg">Jonathan Sarmiento</p>
-          <p class="font-medium text-ternary">jhonnsarmiento@gmail.com</p>
+          <p class="font-medium text-lg">{{ user.fullName }}</p>
+          <p class="font-medium text-ternary">{{ user.email }}</p>
         </div>
-        <div class="w-14 h-14 bg-slate-600 rounded-full text-center text-white">FOTO</div>
+        <img :src="user.photoUrl" alt="Profile Photo" class="w-14 h-14 rounded-full" />
       </div>
     </RouterLink>
   </nav>
 </template>
 
 <script setup>
-import { defineProps } from 'vue'
+import { ref } from 'vue'
 import INClogo from '@/components/LogoIcon.vue'
 
 defineProps({
@@ -29,5 +29,13 @@ defineProps({
     type: Boolean,
     default: false
   }
+})
+
+// Define the user object
+const user = ref({
+  id: 1,
+  fullName: 'Jonathan Sarmiento',
+  email: 'jhonnsarmiento@gmail.com',
+  photoUrl: 'https://i.ibb.co/3zHGVfz/profile-Photo.png'
 })
 </script>
