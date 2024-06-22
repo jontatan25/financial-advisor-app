@@ -30,7 +30,7 @@
               :class="tableCellClass(index, asset, rowIndex)"
             >
               <div v-if="index === 0" class="h-full px-4 py-2">
-                <div class="truncate">{{ asset.name }}</div>
+                <div class="truncate">{{ renderTableCell(asset, column) }}</div>
               </div>
               <div v-else class="flex items-center justify-center h-full px-4 py-2">
                 {{ renderTableCell(asset, column) }}
@@ -133,7 +133,7 @@ const tableCellClass = (index: number, asset: any, rowIndex: number) => {
 const renderTableCell = (asset: any, column: string) => {
   switch (column) {
     case 'Name':
-      return asset.name
+      return asset.name || 'N/A'
     case 'Type':
       return asset.type
     case 'Currency':
