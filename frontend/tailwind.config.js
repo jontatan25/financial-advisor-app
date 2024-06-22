@@ -26,7 +26,7 @@ export default {
         ridanger: '#FF5733', // danger red
         ridarktext: '#1D2939', //dark grey text
         ritableheader: '#FCFCFD', // table header bg
-        riyellow: '#F5BC00', // table header bg
+        riyellow: '#F5BC00' // table header bg
       },
       width: {
         'custom-544': '544px',
@@ -41,7 +41,6 @@ export default {
       },
       borderColor: {
         'custom-white': '#E9E9E9',
-        'ritableheaderborder': '#EAECF0' // table border
       },
       borderWidth: {
         'custom-1': '1px'
@@ -53,6 +52,7 @@ export default {
       const newUtilities = {
         '.btn-state': {
           border: '3px solid transparent', // Invisible border by default
+          transition: 'background-color 0.3s, border-color 0.3s', // Adding transition properties
           '&:hover': {
             backgroundColor: '#3061D9'
           },
