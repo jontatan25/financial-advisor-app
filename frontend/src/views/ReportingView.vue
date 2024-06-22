@@ -27,12 +27,15 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 import axios from 'axios'
+import { useRouter } from 'vue-router'
 import CurrencyChart from '@/components/CurrencyChart.vue'
 import OverviewComponent from '@/components/OverviewComponent.vue'
 import InvestmentChart from '@/components/InvestmentChart.vue'
 import InstitutionChart from '@/components/InstitutionChart.vue'
 import TableComponent from '@/components/TableComponent.vue'
 import DownloadIcon from '@/components/icons/DownloadIcon.vue'
+
+const router = useRouter()
 
 const assets = ref([])
 const loading = ref(false)
