@@ -2,28 +2,36 @@
   <div class="flex justify-between mb-8">
     <div
       class="w-custom-544 h-48 pt-6 pb-8 px-8 border-custom-1 border-custom-white rounded-3xl shadow-lg flex justify-between bg-white"
+      role="region"
+      aria-labelledby="total-asset-value"
     >
       <div class="pt-custom-14 total-value flex flex-col justify-between h-full">
-        <h3 class="text-xl font-medium text-secondary">Total Asset Value</h3>
+        <h3 id="total-asset-value" class="text-xl font-medium text-secondary">Total Asset Value</h3>
         <p class="text-5xl font-medium">{{ formattedTotalAssetValue }}</p>
       </div>
 
       <div class="flex flex-col justify-between items-end h-full">
-        <div class="rounded-2xl w-14 h-14 flex justify-center items-center bg-primary"><WalletIcon /></div>
-        <!-- Daily change/loss to be implemented -->
+        <div class="rounded-2xl w-14 h-14 flex justify-center items-center bg-primary">
+          <WalletIcon aria-hidden="true" />
+        </div>
         <p class="text-xl text-green-700 font-medium">+€11,050 today</p>
       </div>
     </div>
+
     <div
       class="w-custom-544 h-48 pt-6 pb-8 px-8 border-custom-1 border-custom-white rounded-3xl shadow-lg flex justify-between bg-white"
+      role="region"
+      aria-labelledby="total-profits"
     >
       <div class="pt-custom-14 total-value flex flex-col justify-between h-full">
-        <h3 class="text-xl font-medium text-secondary">Total Profits</h3>
+        <h3 id="total-profits" class="text-xl font-medium text-secondary">Total Profits</h3>
         <p :class="dailyChangeClass">{{ formattedDailyChange }}</p>
       </div>
 
       <div class="flex flex-col justify-between items-end h-full">
-        <div class="rounded-2xl w-14 h-14 flex justify-center items-center bg-emerald-400"><PlantIcon /></div>
+        <div class="rounded-2xl w-14 h-14 flex justify-center items-center bg-emerald-400">
+          <PlantIcon aria-hidden="true" />
+        </div>
         <div class="flex">
           <p :class="percentageChangeClass" class="mr-3 text-xl font-medium">
             {{ formattedPercentageChange }}
@@ -31,11 +39,14 @@
         </div>
       </div>
     </div>
+
     <div
       class="w-custom-544 h-48 pt-6 pb-8 px-8 border-custom-1 border-custom-white rounded-3xl shadow-lg flex justify-between bg-white"
+      role="region"
+      aria-labelledby="brief-summary"
     >
       <div class="pt-custom-14 total-value flex flex-col justify-between h-full">
-        <h3 class="text-xl font-medium text-secondary">Brief Summary</h3>
+        <h3 id="brief-summary" class="text-xl font-medium text-secondary">Brief Summary</h3>
         <div class="flex">
           <h3 class="text-xl text-secondary mr-10">Total Positions held</h3>
           <span class="text-2xl font-medium">{{ totalPositions }}</span>
@@ -47,7 +58,9 @@
       </div>
 
       <div class="flex flex-col justify-between items-end h-full">
-        <div class="rounded-2xl w-14 h-14 flex justify-center items-center bg-riyellow"><SheetIcon /></div>
+        <div class="rounded-2xl w-14 h-14 flex justify-center items-center bg-riyellow">
+          <SheetIcon aria-hidden="true" />
+        </div>
       </div>
     </div>
   </div>

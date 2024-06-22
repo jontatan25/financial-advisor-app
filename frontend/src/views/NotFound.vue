@@ -12,5 +12,3 @@
     </router-link>
   </div>
 </template>
-
-x

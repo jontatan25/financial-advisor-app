@@ -1,13 +1,22 @@
 <template>
   <div
     class="p-8 w-custom-400 h-custom-460 border-custom-1 border-custom-white rounded-3xl bg-white flex flex-col"
+    role="region"
+    aria-labelledby="investment-type-heading"
   >
     <div class="mb-7">
-      <h3 class="mb-2 font-semibold text-2xl text-accent">By Type of Investment</h3>
+      <h3 id="investment-type-heading" class="mb-2 font-semibold text-2xl text-accent">
+        By Type of Investment
+      </h3>
       <p class="font-medium text-lg leading-7 text-ternary">Assets grouped by investment type</p>
     </div>
     <div class="grow">
-      <Bar v-if="!loading && loaded" :data="chartData" :options="chartOptions" />
+      <Bar
+        v-if="!loading && loaded"
+        :data="chartData"
+        :options="chartOptions"
+        aria-label="Investment type distribution chart"
+      />
       <p v-else-if="loading">Loading...</p>
       <p v-else>No data available</p>
     </div>

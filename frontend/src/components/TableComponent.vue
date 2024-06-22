@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="pt-8 w-full mb-11 h-full border-custom-1 border-custom-white rounded-3xl bg-white flex flex-col"
-  >
+  <div class="pt-8 w-full mb-11 h-full border-custom-1 border-custom-white rounded-3xl bg-white flex flex-col">
     <div class="mb-7 px-8">
       <h3 class="mb-2 font-semibold text-2xl text-accent">My Investment Assets</h3>
       <p class="font-medium text-lg leading-7 text-ternary">
@@ -9,6 +7,7 @@
       </p>
     </div>
     <div class="grow">
+      <!-- Display table when assets are loaded and available -->
       <table v-if="!loading && assets.length" class="min-w-full table-auto">
         <thead>
           <tr>
@@ -17,8 +16,8 @@
               :key="index"
               :class="tableHeaderClass(index)"
             >
-              {{ column === 'Name' ? 'Name' : '' }}
-              <span v-if="column !== 'Name'">{{ column }}</span>
+              <span v-if="index === 0">Name</span> <!-- Include 'Name' header specifically -->
+              <span v-else>{{ column }}</span> <!-- Display other headers -->
             </th>
           </tr>
         </thead>
@@ -48,6 +47,7 @@
 <script setup lang="ts">
 import { defineProps, computed } from 'vue'
 
+// Define props for loading state and assets data
 defineProps<{
   loading: boolean
   assets: Array<{
@@ -63,48 +63,23 @@ defineProps<{
   }>
 }>()
 
-// Helper functions to format the display values
-const formatCurrency = (value: number) => {
-  return new Intl.NumberFormat('en-EN', { style: 'currency', currency: 'EUR' }).format(value)
-}
-
-const formatChange = (balance: number, cost: number) => {
-  if (cost === 0) return 'N/A'
-
-  const change = ((balance - cost) / cost) * 100
-  if (!isFinite(change)) return 'N/A' // Handle division by zero or invalid data
-
-  const sign = change > 0 ? '+' : ''
-  return `${sign}${change.toFixed(1)}%`
-}
-
-const formatGainLoss = (balance: number, cost: number) => {
-  const gainLoss = balance - cost
-  const sign = gainLoss > 0 ? '+' : ''
-  return `${sign}${formatCurrency(gainLoss)}`
-}
-
-// Define table columns
-const tableColumns = computed(() => {
-  return [
-    'Name',
-    'Type',
-    'Currency',
-    'Entity',
-    'Number of Shares',
-    'Balance',
-    'Change (%)',
-    'Gain/Loss (€)'
-  ]
-})
+// Define table columns as computed property
+const tableColumns = computed(() => [
+  'Name',
+  'Type',
+  'Currency',
+  'Entity',
+  'Number of Shares',
+  'Balance',
+  'Change (%)',
+  'Gain/Loss (€)'
+])
 
 // Computed property for table header classes
 function tableHeaderClass(index: number) {
-  if (index === 0) {
-    return 'px-8 py-4 text-left font-semibold text-xl text-ridarktext bg-ritableheader border-t '
-  } else {
-    return 'px-4 py-4 text-center font-semibold text-xl text-ridarktext bg-ritableheader border-t '
-  }
+  return index === 0
+    ? 'px-8 py-4 text-left font-semibold text-xl text-ridarktext bg-ritableheader border-t'
+    : 'px-4 py-4 text-center font-semibold text-xl text-ridarktext bg-ritableheader border-t'
 }
 
 // Computed property for table cell classes
@@ -113,19 +88,20 @@ const tableCellClass = (index: number, asset: any, rowIndex: number) => {
     return 'border-t px-4 py-4 font-medium text-ripurple text-xl'
   } else if (index === 6) {
     const change = ((asset.balance - asset.cost) / asset.cost) * 100
-    if (!isFinite(change)) return 'border-t px-4 py-4 font-medium text-ridarktext text-xl'
-    return change > 0
-      ? 'border-t px-4 py-4 font-medium text-risuccess text-xl'
-      : 'border-t px-4 py-4 font-medium text-ridanger text-xl'
+    return !isFinite(change)
+      ? 'border-t px-4 py-4 font-medium text-ridarktext text-xl'
+      : change > 0
+        ? 'border-t px-4 py-4 font-medium text-risuccess text-xl'
+        : 'border-t px-4 py-4 font-medium text-ridanger text-xl'
   } else if (index === 7) {
     const gainLoss = asset.balance - asset.cost
     return gainLoss > 0
       ? 'border-t px-4 py-4 font-medium text-risuccess text-xl'
       : 'border-t px-4 py-4 font-medium text-ridanger text-xl'
-  } else if (rowIndex === 0) {
-    return 'border-t px-4 py-4 font-medium text-ridarktext text-xl'
   } else {
-    return 'border-t px-4 py-4 font-medium text-ridarktext text-xl'
+    return rowIndex === 0
+      ? 'border-t px-4 py-4 font-medium text-ridarktext text-xl'
+      : 'border-t px-4 py-4 font-medium text-ridarktext text-xl'
   }
 }
 
@@ -152,11 +128,29 @@ const renderTableCell = (asset: any, column: string) => {
       return ''
   }
 }
+
+// Helper function to format currency
+const formatCurrency = (value: number) => {
+  return new Intl.NumberFormat('en-EN', { style: 'currency', currency: 'EUR' }).format(value)
+}
+
+// Format functions for displaying data
+const formatChange = (balance: number, cost: number) => {
+  if (cost === 0) return 'N/A'
+
+  const change = ((balance - cost) / cost) * 100
+  return isFinite(change) ? `${change > 0 ? '+' : ''}${change.toFixed(1)}%` : 'N/A'
+}
+
+const formatGainLoss = (balance: number, cost: number) => {
+  const gainLoss = balance - cost
+  return `${gainLoss > 0 ? '+' : ''}${formatCurrency(gainLoss)}`
+}
 </script>
 
 <style scoped>
 .truncate {
-  max-width: 350px; /* Adjust max-width as needed */
+  max-width: 350px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

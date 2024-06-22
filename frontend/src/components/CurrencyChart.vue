@@ -1,13 +1,20 @@
 <template>
   <div
     class="p-8 w-custom-400 h-custom-460 border-custom-1 border-custom-white rounded-3xl bg-white flex flex-col"
+    role="region"
+    aria-labelledby="by-currency-heading"
   >
     <div class="mb-7">
-      <h3 class="mb-2 font-semibold text-2xl text-accent">By Currency</h3>
+      <h3 id="by-currency-heading" class="mb-2 font-semibold text-2xl text-accent">By Currency</h3>
       <p class="font-medium text-lg leading-7 text-ternary">Assets grouped by currency</p>
     </div>
     <div class="grow">
-      <Doughnut v-if="!loading && loaded" :data="chartData" :options="chartOptions" />
+      <Doughnut
+        v-if="!loading && loaded"
+        :data="chartData"
+        :options="chartOptions"
+        aria-label="Currency distribution chart"
+      />
       <p v-else-if="loading">Loading...</p>
       <p v-else>No data available</p>
     </div>
@@ -29,7 +36,7 @@ const props = defineProps<{
 
 const loaded = ref(false)
 const chartData = ref({
-  labels: ['EUR(€)', 'USD($)', 'GBP'],
+  labels: ['EUR(€)', 'USD($)', 'GBP(£)'],
   datasets: [
     {
       backgroundColor: ['#0D192C', '#22CAAD', '#3872FF'],
