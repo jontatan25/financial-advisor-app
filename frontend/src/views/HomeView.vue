@@ -4,7 +4,7 @@
     <p class="mb-32 text-2xl font-medium text-secondary">
       ReportINC helps you manage your investments.
     </p>
-    <RouterLink :to="{ name: 'Reporting' }" class="bg-primary px-9 py-4 rounded-lg flex items-center">
+    <RouterLink :to="{ name: 'Reporting' }" class="btn-state bg-primary px-9 py-4 rounded-lg flex items-center">
       <div class="text-white text-xl font-semibold mr-3">Get Started</div>
       <ArrowRight />
     </RouterLink>

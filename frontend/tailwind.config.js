@@ -48,5 +48,25 @@ export default {
       }
     }
   },
-  plugins: []
+  plugins: [
+    function ({ addUtilities }) {
+      const newUtilities = {
+        '.btn-state': {
+          border: '3px solid transparent', // Invisible border by default
+          '&:hover': {
+            backgroundColor: '#3061D9'
+          },
+          '&:active': {
+            '@apply bg-slate-700': {}
+          },
+          '&:focus': {
+            border: '3px solid #2851B5',
+            outline: 'none'
+          }
+        }
+      }
+
+      addUtilities(newUtilities, ['hover', 'focus', 'active'])
+    }
+  ]
 }

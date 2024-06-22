@@ -8,7 +8,7 @@
         </p>
       </div>
 
-      <button class="flex items-center bg-primary px-8 rounded-lg h-16">
+      <button class="btn-state flex items-center bg-primary px-8 rounded-lg h-16 ">
         <p class="mr-3 text-white"><DownloadIcon /></p>
         <p class="text-white text-xl font-semibold">Download Report</p>
       </button>
