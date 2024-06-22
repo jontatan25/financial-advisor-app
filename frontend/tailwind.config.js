@@ -52,12 +52,12 @@ export default {
       const newUtilities = {
         '.btn-state': {
           border: '3px solid transparent', // Invisible border by default
-          transition: 'background-color 0.3s, border-color 0.3s', // Adding transition properties
+          transition: 'background-color 0.3s, border-color 0.3s',
           '&:hover': {
             backgroundColor: '#3061D9'
           },
           '&:active': {
-            '@apply bg-slate-700': {}
+            backgroundColor: '#193373'
           },
           '&:focus': {
             border: '3px solid #2851B5',
