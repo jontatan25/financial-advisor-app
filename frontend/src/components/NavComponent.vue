@@ -26,21 +26,27 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
 import INClogo from '@/components/icons/LogoIcon.vue'
 
-defineProps({
-  isLoggedIn: {
-    type: Boolean,
-    default: false
-  }
-})
+const isLoggedIn = ref(false)
 
-// Define the user object
+// Define Mock user object
 const user = ref({
   id: 1,
   fullName: 'Jonathan Sarmiento',
   email: 'jhonnsarmiento@gmail.com',
   photoUrl: 'https://i.ibb.co/3zHGVfz/profile-Photo.png'
 })
+
+const route = useRoute()
+
+// Simulate Loggin status - based on the current route path
+watch(
+  () => route.path,
+  (newPath) => {
+    isLoggedIn.value = newPath === '/reporting'
+  }
+)
 </script>

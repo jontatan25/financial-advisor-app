@@ -7,7 +7,7 @@ import FooterComponent from '@/components/FooterComponent.vue'
 <template>
   <div class="flex flex-col min-h-screen bg-riwhite">
     <header>
-      <NavComponent :isLoggedIn="true" />
+      <NavComponent />
     </header>
     <main class="flex-1">
       <RouterView />
