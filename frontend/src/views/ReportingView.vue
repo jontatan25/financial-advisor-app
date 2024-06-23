@@ -27,37 +27,36 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import axios from 'axios'
 import { useRouter } from 'vue-router'
+import type { RouteLocationNormalized } from 'vue-router'
 import CurrencyChart from '@/components/CurrencyChart.vue'
 import OverviewComponent from '@/components/OverviewComponent.vue'
 import InvestmentChart from '@/components/InvestmentChart.vue'
 import InstitutionChart from '@/components/InstitutionChart.vue'
 import TableComponent from '@/components/TableComponent.vue'
 import DownloadIcon from '@/components/icons/DownloadIcon.vue'
+import type { User, Asset } from '@/types/types' // Importing User as a type-only import
 
 const router = useRouter()
 
-const assets = ref([])
-const loading = ref(false)
+const assets = ref<Asset[]>([]) // Array of Asset interface
+const loading = ref<boolean>(false)
 
 const fetchData = async () => {
-  loading.value = true;
-
-  // // Simulate a delay of 1 second (1000 milliseconds)
-  // await new Promise(resolve => setTimeout(resolve, 1000));
+  loading.value = true
 
   try {
-    const response = await axios.get(import.meta.env.VITE_API_URL);
-    assets.value = response.data;
+    const response = await axios.get<Asset[]>(import.meta.env.VITE_API_URL)
+    assets.value = response.data
   } catch (error) {
-    router.push({ name: 'NetworkError' });
+    router.push({ name: 'NetworkError' } as RouteLocationNormalized)
   } finally {
-    loading.value = false;
+    loading.value = false
   }
-};
+}
 
 onMounted(() => {
   fetchData()
@@ -65,7 +64,7 @@ onMounted(() => {
 
 const currentDate = computed(() => {
   const date = new Date()
-  const options = { year: 'numeric', month: 'short', day: 'numeric' }
+  const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric' }
   return date.toLocaleDateString('en-US', options)
 })
 </script>

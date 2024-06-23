@@ -50,20 +50,11 @@
 
 <script setup lang="ts">
 import { defineProps, computed } from 'vue'
+import type { Asset } from '@/types/types'
 
 defineProps<{
   loading: boolean
-  assets: Array<{
-    id: string
-    name: string
-    type: string
-    currency: string
-    entity: string
-    number_of_shares: number
-    balance: number
-    cost: number
-    rate_to_euro: number
-  }>
+  assets: Asset[]
 }>()
 
 // Define table columns as computed property
@@ -79,14 +70,14 @@ const tableColumns = computed(() => [
 ])
 
 // Computed property for table header classes
-function tableHeaderClass(index: number) {
+function tableHeaderClass(index: number): string {
   return index === 0
     ? 'px-8 py-4 text-left font-semibold text-xl text-ridarktext bg-ritableheader border-t'
     : 'px-4 py-4 text-center font-semibold text-xl text-ridarktext bg-ritableheader border-t'
 }
 
 // Computed property for table cell classes
-const tableCellClass = (index: number, asset: any, rowIndex: number) => {
+function tableCellClass(index: number, asset: Asset, rowIndex: number): string {
   if (index === 4) {
     return 'border-t px-4 py-4 font-medium text-ripurple text-xl'
   } else if (index === 6) {
@@ -109,7 +100,7 @@ const tableCellClass = (index: number, asset: any, rowIndex: number) => {
 }
 
 // Helper function to render table cell content based on column key
-const renderTableCell = (asset: any, column: string) => {
+function renderTableCell(asset: Asset, column: string): string {
   switch (column) {
     case 'Name':
       return asset.name || 'N/A'
@@ -120,7 +111,7 @@ const renderTableCell = (asset: any, column: string) => {
     case 'Entity':
       return asset.entity
     case 'Number of Shares':
-      return asset.number_of_shares
+      return asset.number_of_shares.toString()
     case 'Balance':
       return formatCurrency(asset.balance)
     case 'Change (%)':
@@ -133,19 +124,19 @@ const renderTableCell = (asset: any, column: string) => {
 }
 
 // Helper function to format currency
-const formatCurrency = (value: number) => {
+function formatCurrency(value: number): string {
   return new Intl.NumberFormat('en-EN', { style: 'currency', currency: 'EUR' }).format(value)
 }
 
 // Format functions for displaying data
-const formatChange = (balance: number, cost: number) => {
+function formatChange(balance: number, cost: number): string {
   if (cost === 0) return 'N/A'
 
   const change = ((balance - cost) / cost) * 100
   return isFinite(change) ? `${change > 0 ? '+' : ''}${change.toFixed(1)}%` : 'N/A'
 }
 
-const formatGainLoss = (balance: number, cost: number) => {
+function formatGainLoss(balance: number, cost: number): string {
   const gainLoss = balance - cost
   return `${gainLoss > 0 ? '+' : ''}${formatCurrency(gainLoss)}`
 }

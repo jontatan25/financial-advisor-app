@@ -1,6 +1,6 @@
 <template>
   <div
-    class="p-8 w-custom-400 h-custom-460 border-custom-1 border-custom-white rounded-3xl bg-white flex flex-col "
+    class="p-8 w-custom-400 h-custom-460 border-custom-1 border-custom-white rounded-3xl bg-white flex flex-col"
     role="region"
     aria-labelledby="investment-type-heading"
   >
@@ -33,14 +33,18 @@ import {
   BarElement,
   CategoryScale,
   LinearScale,
-  ArcElement
+  ArcElement,
+  type ChartOptions
 } from 'chart.js'
 import { Bar } from 'vue-chartjs'
+import type { Asset } from '@/types/types'
+
+// Register required Chart.js components and plugins
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement)
 
 const props = defineProps<{
   loading: boolean
-  assets: Array<object>
+  assets: Asset[]
 }>()
 
 const loaded = ref(false)
@@ -50,12 +54,12 @@ const chartData = ref({
     {
       backgroundColor: ['#f87979', '#22CAAD', '#3872FF', '#F5BC00', '#8A2BE2'],
       borderRadius: 8,
-      data: []
+      data: [0, 0, 0, 0, 0] // Initial data array with zeroes
     }
   ]
 })
 
-const chartOptions = {
+const chartOptions: ChartOptions<'bar'> = {
   responsive: true,
   maintainAspectRatio: false,
   plugins: {
@@ -64,7 +68,7 @@ const chartOptions = {
     },
     datalabels: {
       color: '#fff',
-      formatter: (value) => {
+      formatter: (value: number) => {
         if (value >= 1e6) {
           return (value / 1e6).toFixed(2) + 'M'
         } else {
@@ -91,13 +95,16 @@ const chartOptions = {
         font: {
           size: 14
         },
-        // Callback function to format y-axis ticks to 4.5M format
-        callback: (value) => {
-          if (value >= 1e6) {
-            return (value / 1e6).toFixed(2) + 'M'
-          } else {
-            return value.toFixed(0)
+        callback: function (value: string | number) {
+          // Adjusted to match the expected signature
+          if (typeof value === 'number') {
+            if (value >= 1e6) {
+              return (value / 1e6).toFixed(2) + 'M'
+            } else {
+              return value.toFixed(0)
+            }
           }
+          return value // Return the value as-is if it's not a number
         }
       },
       grid: {
@@ -115,7 +122,7 @@ watch(
   }
 )
 
-const updateChartData = (data) => {
+const updateChartData = (data: Asset[]) => {
   loaded.value = false
 
   let totalETF = 0

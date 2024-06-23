@@ -66,11 +66,12 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { defineProps, computed } from 'vue'
 import PlantIcon from '@/components/icons/PlantIcon.vue'
 import WalletIcon from '@/components/icons/WalletIcon.vue'
 import SheetIcon from '@/components/icons/SheetIcon.vue'
+import type { Asset, TypeCount, TypeMapping } from '@/types/types'
 
 const props = defineProps({
   loading: {
@@ -78,7 +79,7 @@ const props = defineProps({
     required: true
   },
   assets: {
-    type: Array,
+    type: Array as () => Asset[],
     required: true
   }
 })
@@ -127,12 +128,12 @@ const totalPositions = computed(() => {
 })
 
 const topAssetType = computed(() => {
-  const typeCount = {}
+  const typeCount: TypeCount = {}
   let maxCount = 0
   let topType = ''
 
   // Define mappings for abbreviation to full word
-  const typeMapping = {
+  const typeMapping: TypeMapping = {
     ETF: 'Exchange Traded Funds',
     F: 'Futures',
     FI: 'Fixed Income',
@@ -140,7 +141,7 @@ const topAssetType = computed(() => {
     VI: 'Variable Income'
   }
 
-  props.assets.forEach((asset) => {
+  props.assets.forEach((asset: Asset) => {
     const type = asset.type
     typeCount[type] = (typeCount[type] || 0) + 1
     if (typeCount[type] > maxCount) {

@@ -1,10 +1,10 @@
 <template>
   <nav aria-label="Main Navigation">
-    <div class="flex pt-10" :class="!isLoggedIn ? 'justify-center' : 'justify-between mx-28'">
+    <div :class="navClasses">
       <RouterLink
         to="/"
         class="flex"
-        :class="isLoggedIn ? 'items-center' : ''"
+        :class="{ 'items-center': isLoggedIn }"
         aria-label="ReportINC Home"
       >
         <INClogo aria-hidden="true" />
@@ -17,7 +17,7 @@
         </div>
         <img
           :src="user.photoUrl"
-          alt="Profile Photo of {{ user.fullName }}"
+          :alt="'Profile Photo of ' + user.fullName"
           class="w-14 h-14 rounded-full"
         />
       </div>
@@ -25,15 +25,16 @@
   </nav>
 </template>
 
-<script setup>
-import { ref, watch } from 'vue'
-import { useRoute } from 'vue-router'
+<script setup lang="ts">
+import { ref, watch, computed } from 'vue'
+import { useRoute, RouterLink } from 'vue-router'
 import INClogo from '@/components/icons/LogoIcon.vue'
+import type { User } from '@/types/types'
 
-const isLoggedIn = ref(false)
+const isLoggedIn = ref<boolean>(false)
 
 // Define Mock user object
-const user = ref({
+const user = ref<User>({
   id: 1,
   fullName: 'Jonathan Sarmiento',
   email: 'jhonnsarmiento@gmail.com',
@@ -42,10 +43,17 @@ const user = ref({
 
 const route = useRoute()
 
-// Simulate Loggin status - based on the current route path
+// Compute navigation classes based on isLoggedIn
+const navClasses = computed(() => ({
+  'flex pt-10': true,
+  'justify-center': !isLoggedIn.value,
+  'justify-between mx-28': isLoggedIn.value
+}))
+
+// Update isLoggedIn based on route changes
 watch(
   () => route.path,
-  (newPath) => {
+  (newPath: string) => {
     isLoggedIn.value = newPath === '/reporting'
   }
 )

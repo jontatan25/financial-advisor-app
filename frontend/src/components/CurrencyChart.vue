@@ -22,16 +22,18 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
+import { ref, watch, defineProps } from 'vue'
+import { Chart, ArcElement, Tooltip, Legend, type ChartOptions } from 'chart.js'
 import ChartDataLabels from 'chartjs-plugin-datalabels'
 import { Doughnut } from 'vue-chartjs'
+import type { Asset } from '@/types/types'
 
-ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels)
+// Register required Chart.js components and plugins
+Chart.register(ArcElement, Tooltip, Legend, ChartDataLabels)
 
 const props = defineProps<{
   loading: boolean
-  assets: Array<object>
+  assets: Asset[]
 }>()
 
 const loaded = ref(false)
@@ -40,12 +42,12 @@ const chartData = ref({
   datasets: [
     {
       backgroundColor: ['#0D192C', '#22CAAD', '#3872FF'],
-      data: []
+      data: [0, 0, 0] // Initial data array with zeroes
     }
   ]
 })
 
-const chartOptions = {
+const chartOptions: ChartOptions<'doughnut'> = {
   responsive: true,
   maintainAspectRatio: false,
   plugins: {
@@ -54,9 +56,14 @@ const chartOptions = {
     },
     datalabels: {
       color: '#fff',
-      formatter: (value, context) => {
-        const dataset = context.chart.data.datasets[0]
-        const total = dataset.data.reduce((acc, curr) => acc + curr, 0)
+      formatter: (value: number, context) => {
+        // Ensure context.dataset is defined and has data property
+        if (!context.dataset || !context.dataset.data) {
+          return ''
+        }
+
+        const datasetData = context.dataset.data as number[]
+        const total = datasetData.reduce((acc, curr) => acc + curr, 0)
         const percentage = ((value / total) * 100).toFixed(1)
         return `${percentage}%`
       }
@@ -72,7 +79,7 @@ watch(
   }
 )
 
-const updateChartData = (data) => {
+const updateChartData = (data: Asset[]) => {
   loaded.value = false
 
   // Initialize totals for each currency

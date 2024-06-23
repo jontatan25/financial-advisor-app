@@ -22,7 +22,7 @@ const router = createRouter({
       path: '/:catchAll(.*)',
       name: 'NotFound',
       component: NotFound
-    }, {
+    },{
       path: '/network-error',
       name: 'NetworkError',
       component: NetworkError
