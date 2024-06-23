@@ -91,6 +91,24 @@ fastify.get("/api/data", async (request, reply) => {
   }
 });
 
+// Endpoint to serve CSV file download
+fastify.get("/api/download/csv", async (request, reply) => {
+  try {
+    const filePath = "./positionDataset.csv";
+    const fileContent = fs.readFileSync(filePath, 'utf-8');
+    
+    reply.header(
+      "Content-Disposition",
+      "attachment; filename=positionDataset.csv"
+    );
+    reply.type("text/csv");
+    reply.send(fileContent);
+    console.log(fileContent)
+  } catch (err) {
+    reply.status(500).send({ error: "Internal Server Error" });
+  }
+});
+
 // Start the server
 const start = async () => {
   try {

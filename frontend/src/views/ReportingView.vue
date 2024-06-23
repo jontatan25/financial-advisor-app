@@ -11,6 +11,7 @@
       <button
         class="btn-state flex items-center bg-primary px-8 rounded-lg h-16"
         aria-label="Download Report"
+        @click="downloadCSV"
       >
         <span class="mr-3 text-white" aria-hidden="true"><DownloadIcon /></span>
         <span class="text-white text-xl font-semibold">Download Report</span>
@@ -44,7 +45,6 @@ import { useRiStore } from '@/store/ristore'
 const { user } = useRiStore() as { user: User }
 
 const router = useRouter()
-
 const assets = ref<Asset[]>([])
 const loading = ref<boolean>(false)
 
@@ -52,7 +52,7 @@ const fetchData = async () => {
   loading.value = true
 
   try {
-    const response = await axios.get<Asset[]>(import.meta.env.VITE_API_URL)
+    const response = await axios.get<Asset[]>(import.meta.env.VITE_API_URL + '/data')
     assets.value = response.data
   } catch (error) {
     router.push({ name: 'NetworkError' } as RouteLocationNormalized)
@@ -70,4 +70,23 @@ const currentDate = computed(() => {
   const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric' }
   return date.toLocaleDateString('en-US', options)
 })
+
+const downloadCSV = async () => {
+  try {
+    const response = await axios.get(import.meta.env.VITE_API_URL + '/download/csv', {
+      responseType: 'blob' // Important: responseType should be 'blob' for file download
+    })
+
+    const url = window.URL.createObjectURL(new Blob([response.data]))
+    const link = document.createElement('a')
+    link.href = url
+    link.setAttribute('download', 'positionDataset.csv')
+    document.body.appendChild(link)
+    link.click()
+    link.remove()
+  } catch (error) {
+    console.error('Error downloading CSV:', error)
+    router.push({ name: 'NetworkError' } as RouteLocationNormalized)
+  }
+}
 </script>
