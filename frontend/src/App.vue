@@ -5,7 +5,7 @@ import FooterComponent from '@/components/FooterComponent.vue'
 </script>
 
 <template>
-  <div class="flex flex-col min-h-screen bg-riwhite">
+  <div class="flex flex-col min-h-screen min-w-custom-1663">
     <header>
       <NavComponent />
     </header>

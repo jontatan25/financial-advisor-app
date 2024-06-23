@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-28">
+  <div class="mx-28 min-w-custom-1663">
     <div class="h-20 flex justify-between items-center mt-16 mb-12">
       <div>
         <p class="font-medium text-custom-40 leading-custom-48">Welcome, {{ user.firstName }}</p>
@@ -19,7 +19,7 @@
     </div>
     <OverviewComponent :loading="loading" :assets="assets" />
 
-    <div class="mb-8 flex justify-between min-w-custom-1663">
+    <div class="mb-8 flex justify-between">
       <CurrencyChart :loading="loading" :assets="assets" />
       <InvestmentChart :loading="loading" :assets="assets" />
       <InstitutionChart :loading="loading" :assets="assets" />
