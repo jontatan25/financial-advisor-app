@@ -2,7 +2,7 @@
   <div class="mx-28">
     <div class="h-20 flex justify-between items-center mt-16 mb-12">
       <div>
-        <p class="font-medium text-custom-40 leading-custom-48">Welcome, Jonathan</p>
+        <p class="font-medium text-custom-40 leading-custom-48">Welcome, {{ user.firstName }}</p>
         <p class="font-medium text-custom-24 text-ternary">
           Here’s an update of your assets today - {{ currentDate }}
         </p>
@@ -38,11 +38,14 @@ import InvestmentChart from '@/components/InvestmentChart.vue'
 import InstitutionChart from '@/components/InstitutionChart.vue'
 import TableComponent from '@/components/TableComponent.vue'
 import DownloadIcon from '@/components/icons/DownloadIcon.vue'
-import type { User, Asset } from '@/types/types' // Importing User as a type-only import
+import type { User, Asset } from '@/types/types'
+import { useRiStore } from '@/store/ristore'
+
+const { user } = useRiStore() as { user: User }
 
 const router = useRouter()
 
-const assets = ref<Asset[]>([]) // Array of Asset interface
+const assets = ref<Asset[]>([])
 const loading = ref<boolean>(false)
 
 const fetchData = async () => {

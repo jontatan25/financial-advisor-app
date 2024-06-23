@@ -14,6 +14,7 @@
         <div class="rounded-2xl w-14 h-14 flex justify-center items-center bg-primary">
           <WalletIcon aria-hidden="true" />
         </div>
+        <!-- To implement - Daily Gain/Losses -->
         <p class="text-xl text-green-700 font-medium">+€11,050 today</p>
       </div>
     </div>
