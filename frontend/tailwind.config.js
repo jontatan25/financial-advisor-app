@@ -24,12 +24,11 @@ export default {
         ripurple: '#6941C6', // table amount purple
         risuccess: '#027A48', // green success
         ridanger: '#FF5733', // danger red
-        ridarktext: '#1D2939', //dark grey text
+        ridarktext: '#1D2939', // dark grey text
         ritableheader: '#FCFCFD', // table header bg
         riyellow: '#F5BC00' // table header bg
       },
       width: {
-        'custom-544': '544px',
         'custom-400': '400px',
         'custom-832': '832px'
       },
@@ -40,10 +39,14 @@ export default {
         'custom-14': '14px'
       },
       borderColor: {
-        'custom-white': '#E9E9E9',
+        'custom-white': '#E9E9E9'
       },
       borderWidth: {
         'custom-1': '1px'
+      },
+      minWidth: {
+        'custom-544': '544px',
+        'custom-1663': '1663px'
       }
     }
   },

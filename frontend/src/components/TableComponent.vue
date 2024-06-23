@@ -1,5 +1,7 @@
 <template>
-  <div class="pt-8 w-full mb-11 h-full border-custom-1 border-custom-white rounded-3xl bg-white flex flex-col">
+  <div
+    class="pt-8 w-full mb-11 h-full border-custom-1 border-custom-white rounded-3xl bg-white flex flex-col min-w-custom-1663"
+  >
     <div class="mb-7 px-8">
       <h3 class="mb-2 font-semibold text-2xl text-accent">My Investment Assets</h3>
       <p class="font-medium text-lg leading-7 text-ternary">
@@ -16,8 +18,10 @@
               :key="index"
               :class="tableHeaderClass(index)"
             >
-              <span v-if="index === 0">Name</span> <!-- Include 'Name' header specifically -->
-              <span v-else>{{ column }}</span> <!-- Display other headers -->
+              <span v-if="index === 0">Name</span>
+              <!-- Include 'Name' header specifically -->
+              <span v-else>{{ column }}</span>
+              <!-- Display other headers -->
             </th>
           </tr>
         </thead>
@@ -38,7 +42,7 @@
           </tr>
         </tbody>
       </table>
-      <p v-else-if="loading">Loading...</p>
+      <p v-else-if="loading" class="p-8">Loading...</p>
       <p v-else>No data available</p>
     </div>
   </div>
@@ -47,7 +51,6 @@
 <script setup lang="ts">
 import { defineProps, computed } from 'vue'
 
-// Define props for loading state and assets data
 defineProps<{
   loading: boolean
   assets: Array<{

@@ -18,7 +18,7 @@
     </div>
     <OverviewComponent :loading="loading" :assets="assets" />
 
-    <div class="mb-8 flex justify-between">
+    <div class="mb-8 flex justify-between min-w-custom-1663">
       <CurrencyChart :loading="loading" :assets="assets" />
       <InvestmentChart :loading="loading" :assets="assets" />
       <InstitutionChart :loading="loading" :assets="assets" />
@@ -44,16 +44,20 @@ const assets = ref([])
 const loading = ref(false)
 
 const fetchData = async () => {
-  loading.value = true
+  loading.value = true;
+
+  // // Simulate a delay of 1 second (1000 milliseconds)
+  // await new Promise(resolve => setTimeout(resolve, 1000));
+
   try {
-    const response = await axios.get(import.meta.env.VITE_API_URL)
-    assets.value = response.data
+    const response = await axios.get(import.meta.env.VITE_API_URL);
+    assets.value = response.data;
   } catch (error) {
-    router.push({ name: 'NetworkError' })
+    router.push({ name: 'NetworkError' });
   } finally {
-    loading.value = false
+    loading.value = false;
   }
-}
+};
 
 onMounted(() => {
   fetchData()

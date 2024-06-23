@@ -1,6 +1,6 @@
 <template>
   <div
-    class="p-8 w-custom-400 h-custom-460 border-custom-1 border-custom-white rounded-3xl bg-white flex flex-col"
+    class="p-8 w-custom-400 h-custom-460 border-custom-1 border-custom-white rounded-3xl bg-white flex flex-col "
     role="region"
     aria-labelledby="investment-type-heading"
   >

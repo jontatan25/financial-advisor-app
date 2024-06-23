@@ -1,7 +1,7 @@
 <template>
-  <div class="flex justify-between mb-8">
+  <div class="flex justify-between mb-8 min-w-custom-1663">
     <div
-      class="w-custom-544 h-48 pt-6 pb-8 px-8 border-custom-1 border-custom-white rounded-3xl shadow-lg flex justify-between bg-white"
+      class="w-custom-544 min-w-custom-544 h-48 pt-6 pb-8 px-8 border-custom-1 border-custom-white rounded-3xl shadow-lg flex justify-between bg-white"
       role="region"
       aria-labelledby="total-asset-value"
     >
@@ -19,7 +19,7 @@
     </div>
 
     <div
-      class="w-custom-544 h-48 pt-6 pb-8 px-8 border-custom-1 border-custom-white rounded-3xl shadow-lg flex justify-between bg-white"
+      class="w-custom-544 min-w-custom-544 h-48 pt-6 pb-8 px-8 border-custom-1 border-custom-white rounded-3xl shadow-lg flex justify-between bg-white"
       role="region"
       aria-labelledby="total-profits"
     >
@@ -41,7 +41,7 @@
     </div>
 
     <div
-      class="w-custom-544 h-48 pt-6 pb-8 px-8 border-custom-1 border-custom-white rounded-3xl shadow-lg flex justify-between bg-white"
+      class="w-custom-544 min-w-custom-544 h-48 pt-6 pb-8 px-8 border-custom-1 border-custom-white rounded-3xl shadow-lg flex justify-between bg-white"
       role="region"
       aria-labelledby="brief-summary"
     >
