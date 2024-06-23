@@ -1,5 +1,6 @@
 <template>
   <div class="flex justify-between mb-8 min-w-custom-1663">
+    <!-- Total Asset Value Card -->
     <div
       class="w-custom-544 min-w-custom-544 h-48 pt-6 pb-8 px-8 border-custom-1 border-custom-white rounded-3xl shadow-lg flex justify-between bg-white"
       role="region"
@@ -19,6 +20,7 @@
       </div>
     </div>
 
+    <!-- Total Profits Card -->
     <div
       class="w-custom-544 min-w-custom-544 h-48 pt-6 pb-8 px-8 border-custom-1 border-custom-white rounded-3xl shadow-lg flex justify-between bg-white"
       role="region"
@@ -33,14 +35,17 @@
         <div class="rounded-2xl w-14 h-14 flex justify-center items-center bg-emerald-400">
           <PlantIcon aria-hidden="true" />
         </div>
-        <div class="flex">
-          <p :class="percentageChangeClass" class="mr-3 text-xl font-medium">
+        <div class="flex items-center">
+          <ArrowUp v-if="dailyChange >= 0" />
+          <ArrowDown v-if="dailyChange < 0" />
+          <p :class="percentageChangeClass" class="text-xl font-medium">
             {{ formattedPercentageChange }}
           </p>
         </div>
       </div>
     </div>
 
+    <!-- Brief Summary Card -->
     <div
       class="w-custom-544 min-w-custom-544 h-48 pt-6 pb-8 px-8 border-custom-1 border-custom-white rounded-3xl shadow-lg flex justify-between bg-white"
       role="region"
@@ -72,6 +77,8 @@ import { defineProps, computed } from 'vue'
 import PlantIcon from '@/components/icons/PlantIcon.vue'
 import WalletIcon from '@/components/icons/WalletIcon.vue'
 import SheetIcon from '@/components/icons/SheetIcon.vue'
+import ArrowDown from '@/components/icons/ArrowDown.vue'
+import ArrowUp from '@/components/icons/ArrowUp.vue'
 import type { Asset, TypeCount, TypeMapping } from '@/types/types'
 
 const props = defineProps({
