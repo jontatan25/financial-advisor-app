@@ -1,12 +1,7 @@
 <template>
   <nav aria-label="Main Navigation">
     <div :class="navClasses">
-      <RouterLink
-        to="/"
-        class="flex"
-        :class="{ 'items-center': isLoggedIn }"
-        aria-label="ReportINC Home"
-      >
+      <RouterLink to="/" class="flex items-center" aria-label="ReportINC Home">
         <INClogo aria-hidden="true" />
         <p class="ml-4 font-bold text-2xl text-primary flex items-center">ReportINC</p>
       </RouterLink>

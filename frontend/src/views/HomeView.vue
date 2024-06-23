@@ -6,7 +6,7 @@
     </p>
     <RouterLink
       :to="{ name: 'Reporting' }"
-      class="btn-state bg-primary px-9 py-4 rounded-lg flex items-center"
+      class="btn-state bg-primary px-9 py-4 rounded-lg flex items-center animate-button"
       aria-label="Get Started with ReportINC"
       @click="handleLogin"
     >
@@ -31,3 +31,20 @@ const handleLogin = () => {
   store.loginUser()
 }
 </script>
+
+<style scoped>
+.animate-button {
+  animation: moveUp 1.5s ease forwards;
+}
+
+@keyframes moveUp {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(-20px);
+    opacity: 100;
+  }
+}
+</style>
