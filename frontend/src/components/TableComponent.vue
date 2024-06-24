@@ -45,17 +45,58 @@
       <p v-else-if="loading" class="p-8">Loading...</p>
       <p v-else>No data available</p>
     </div>
+    <!-- Pagination Controls -->
+    <div class="flex justify-center items-center pt-7 mb-7 border-t">
+      <button
+        class="px-4 py-2 mx-2 rounded text-lg"
+        :class="{ 'text-ternary': page === 1 }"
+        :disabled="page === 1"
+        @click="goToFirstPage"
+      >
+        &lt;&lt;&lt;
+      </button>
+      <button
+        class="px-4 py-2 mx-2 border rounded text-xl text-ridarktext border-ridarktext min-w-36"
+        :class="{ 'text-ternary border-ternary': page === 1 }"
+        :disabled="page === 1"
+        @click="changePage(page - 1)"
+      >
+        Previous
+      </button>
+      <span class="px-2 font-medium">Page {{ page }}</span>
+      <button
+        class="px-4 py-2 mx-2 border rounded text-xl text-ridarktext border-ridarktext min-w-36"
+        :class="{ 'text-ternary border-ternary': page >= totalPages }"
+        :disabled="page >= totalPages"
+        @click="changePage(page + 1)"
+      >
+        Next
+      </button>
+      <button
+        class="px-4 py-2 mx-2 rounded text-lg"
+        :class="{ 'text-ternary': page >= totalPages }"
+        :disabled="page >= totalPages"
+        @click="goToLastPage"
+      >
+        &gt;&gt;&gt;
+      </button>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { defineProps, computed } from 'vue'
+import { defineProps, defineEmits, computed } from 'vue'
 import type { Asset } from '@/types/types'
 
-defineProps<{
+const props = defineProps<{
   loading: boolean
   assets: Asset[]
+  total: number
+  page: number
+  limit: number
 }>()
+
+const emits = defineEmits(['page-changed'])
 
 // Define table columns as computed property
 const tableColumns = computed(() => [
@@ -105,15 +146,15 @@ function renderTableCell(asset: Asset, column: string): string {
     case 'Name':
       return asset.name || 'N/A'
     case 'Type':
-      return asset.type
+      return asset.type || 'N/A'
     case 'Currency':
-      return asset.currency
+      return asset.currency || 'N/A'
     case 'Entity':
-      return asset.entity
+      return asset.entity || 'N/A'
     case 'Number of Shares':
-      return asset.number_of_shares.toString()
+      return asset.number_of_shares !== undefined ? asset.number_of_shares.toString() : 'N/A'
     case 'Balance':
-      return formatCurrency(asset.balance)
+      return formatCurrency(asset.balance !== undefined ? asset.balance : 0)
     case 'Change (%)':
       return formatChange(asset.balance, asset.cost)
     case 'Gain/Loss (€)':
@@ -139,6 +180,21 @@ function formatChange(balance: number, cost: number): string {
 function formatGainLoss(balance: number, cost: number): string {
   const gainLoss = balance - cost
   return `${gainLoss > 0 ? '+' : ''}${formatCurrency(gainLoss)}`
+}
+
+const totalPages = computed(() => Math.ceil(props.total / props.limit))
+
+// Pagination Functions
+const goToFirstPage = () => {
+  emits('page-changed', 1)
+}
+
+const goToLastPage = () => {
+  emits('page-changed', totalPages.value)
+}
+
+const changePage = (newPage: number) => {
+  emits('page-changed', newPage)
 }
 </script>
 
