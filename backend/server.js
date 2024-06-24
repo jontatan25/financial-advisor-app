@@ -1,37 +1,12 @@
 const fastify = require("fastify")({ logger: true });
 const fs = require("fs");
 const csvParser = require("csv-parser");
+const dataSchema = require("./dataSchema");
 
 // Enable CORS
 fastify.register(require("@fastify/cors"), {
   origin: "*",
 });
-
-// Schema for serialization
-const dataSchema = {
-  type: "object",
-  properties: {
-    id: { type: "string" },
-    accrued_interest: { type: ["number", "null"] },
-    number_of_shares: { type: "number" },
-    balance: { type: "number" },
-    capital_gain: { type: "number" },
-    cost: { type: "number" },
-    currency: { type: "string" },
-    entity: { type: "string" },
-    expiration_date: { type: ["string", "null"] },
-    initial_date: { type: ["string", "null"] },
-    interest_rate: { type: ["number", "null"] },
-    is_nominal: { type: "boolean" },
-    isin: { type: "string" },
-    market: { type: "string" },
-    name: { type: "string" },
-    portfolio_id: { type: "string" },
-    type: { type: "string" },
-    valuation_date: { type: "string" },
-    rate_to_euro: { type: "number" },
-  },
-};
 
 // Function to parse and convert CSV data
 const parseAndConvertCSVData = () => {
@@ -77,15 +52,25 @@ const parseAndConvertCSVData = () => {
   });
 };
 
-// Endpoint to serve CSV data as JSON
+// Endpoint to serve CSV data as JSON with pagination
 fastify.get("/api/data", async (request, reply) => {
   try {
     const data = await parseAndConvertCSVData();
+    const { page = 1, limit = 10 } = request.query;
+    const startIndex = (page - 1) * limit;
+    const endIndex = page * limit;
+    const paginatedData = data.slice(startIndex, endIndex);
+
     const serialize = reply.compileSerializationSchema({
       type: "array",
       items: dataSchema,
     });
-    reply.send(serialize(data));
+    reply.send({
+      data: serialize(paginatedData),
+      total: data.length,
+      page: Number(page),
+      limit: Number(limit),
+    });
   } catch (err) {
     reply.status(500).send({ error: "Internal Server Error" });
   }
@@ -95,15 +80,14 @@ fastify.get("/api/data", async (request, reply) => {
 fastify.get("/api/download/csv", async (request, reply) => {
   try {
     const filePath = "./positionDataset.csv";
-    const fileContent = fs.readFileSync(filePath, 'utf-8');
-    
+    const fileContent = fs.readFileSync(filePath, "utf-8");
+
     reply.header(
       "Content-Disposition",
       "attachment; filename=positionDataset.csv"
     );
     reply.type("text/csv");
     reply.send(fileContent);
-    console.log(fileContent)
   } catch (err) {
     reply.status(500).send({ error: "Internal Server Error" });
   }
