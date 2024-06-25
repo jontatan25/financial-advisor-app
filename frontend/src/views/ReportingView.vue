@@ -24,14 +24,7 @@
       <InvestmentChart :loading="loading" :assets="assets" />
       <InstitutionChart :loading="loading" :assets="assets" />
     </div>
-    <TableComponent
-      :loading="loading"
-      :assets="assets"
-      :total="total"
-      :page="page"
-      :limit="limit"
-      @page-changed="handlePageChange"
-    />
+    <TableComponent :total="total" :limit="limit" />
   </div>
 </template>
 
@@ -55,17 +48,13 @@ const router = useRouter()
 const assets = ref<Asset[]>([])
 const loading = ref<boolean>(false)
 const total = ref<number>(0)
-const page = ref<number>(1)
 const limit = ref<number>(10)
 
-const fetchData = async (page: number, limit: number) => {
+const fetchAllAssets = async () => {
   loading.value = true
 
   try {
-    const response = await axios.get(
-      import.meta.env.VITE_API_URL + `/data?page=${page}&limit=${limit}`
-    )
-
+    const response = await axios.get(import.meta.env.VITE_API_URL + `/data?page=1&limit=400`)
     const dataArray = JSON.parse(response.data.data)
     assets.value = dataArray
     total.value = response.data.total
@@ -77,7 +66,7 @@ const fetchData = async (page: number, limit: number) => {
 }
 
 onMounted(() => {
-  fetchData(page.value, limit.value)
+  fetchAllAssets()
 })
 
 const currentDate = computed(() => {
@@ -103,10 +92,5 @@ const downloadCSV = async () => {
     console.error('Error downloading CSV:', error)
     router.push({ name: 'NetworkError' } as RouteLocationNormalized)
   }
-}
-
-const handlePageChange = (newPage: number) => {
-  page.value = newPage
-  fetchData(page.value, limit.value)
 }
 </script>

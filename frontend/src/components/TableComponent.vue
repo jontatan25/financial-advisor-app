@@ -42,7 +42,7 @@
           </tr>
         </tbody>
       </table>
-      <p v-else-if="loading" class="p-8">Loading...</p>
+      <p v-else-if="loading" class="p-8 h-[835px]">Loading...</p>
       <p v-else>No data available</p>
     </div>
     <!-- Pagination Controls -->
@@ -85,18 +85,18 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits, computed } from 'vue'
+import { ref, defineProps, onMounted, computed } from 'vue'
+import axios from 'axios'
 import type { Asset } from '@/types/types'
 
 const props = defineProps<{
-  loading: boolean
-  assets: Asset[]
   total: number
-  page: number
   limit: number
 }>()
 
-const emits = defineEmits(['page-changed'])
+const assets = ref<Asset[]>([])
+const loading = ref<boolean>(false)
+const page = ref<number>(1)
 
 // Define table columns as computed property
 const tableColumns = computed(() => [
@@ -109,6 +109,28 @@ const tableColumns = computed(() => [
   'Change (%)',
   'Gain/Loss (€)'
 ])
+
+const fetchPaginatedAssets = async (page: number, limit: number) => {
+  loading.value = true
+
+  try {
+    const response = await axios.get(
+      import.meta.env.VITE_API_URL + `/data?page=${page}&limit=${limit}`
+    )
+
+    const dataArray = JSON.parse(response.data.data)
+    assets.value = dataArray
+  } catch (error) {
+    console.error('Error fetching paginated assets:', error)
+  } finally {
+    loading.value = false
+  }
+}
+
+// Fetch initial page data on mount
+onMounted(() => {
+  fetchPaginatedAssets(page.value, props.limit)
+})
 
 // Computed property for table header classes
 function tableHeaderClass(index: number): string {
@@ -186,15 +208,16 @@ const totalPages = computed(() => Math.ceil(props.total / props.limit))
 
 // Pagination Functions
 const goToFirstPage = () => {
-  emits('page-changed', 1)
+  changePage(1)
 }
 
 const goToLastPage = () => {
-  emits('page-changed', totalPages.value)
+  changePage(totalPages.value)
 }
 
 const changePage = (newPage: number) => {
-  emits('page-changed', newPage)
+  page.value = newPage
+  fetchPaginatedAssets(newPage, props.limit)
 }
 </script>
 
