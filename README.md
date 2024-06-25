@@ -1,4 +1,4 @@
-# ReportINC - Financial Report Solution (Frontend)
+# ReportINC - Financial Report Solution
 Welcome to ReportINC, your comprehensive financial report solution. This front end application is designed to provide users with insightful analytics and management tools for their investments.
 
 ## Project Overview
