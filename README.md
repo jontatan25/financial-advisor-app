@@ -19,6 +19,16 @@ Clone the repository
 git clone https://github.com/jontatan25/client-management
 cd financial-advisor-app
 ```
+## Configuration
+### Environment Variables
+
+Create a .env file in the root of the frontend directory and add the following environment variable:
+
+```bash
+
+VITE_API_URL=http://localhost:3000/api
+```
+This environment variable points to the backend API URL where the frontend will fetch data.
 # Build and Run with Docker Compose
 Use the following command to start the application:
 
@@ -53,16 +63,6 @@ npm run start
 cd frontend
 npm install
 ```
-## Configuration
-Environment Variables
-
-Create a .env file in the root of the frontend directory and add the following environment variable:
-
-```bash
-
-VITE_API_URL=http://localhost:3000/api
-```
-This environment variable points to the backend API URL where the frontend will fetch data.
 
 ## Running the Vue.js Development Server
 ```bash
