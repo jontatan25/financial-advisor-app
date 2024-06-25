@@ -29,7 +29,7 @@ docker-compose up --build
 - Frontend: The frontend service will be accessible at http://localhost:5173.
 
 ## Stopping the Application (Docker)
-Use the following command to stop the application:
+To stop the application and remove the containers, press Ctrl + C in the terminal where docker-compose up is running.
 
 ```bash
 docker-compose down
