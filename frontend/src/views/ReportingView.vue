@@ -56,7 +56,7 @@ const assets = ref<Asset[]>([])
 const loading = ref<boolean>(false)
 const total = ref<number>(0)
 const page = ref<number>(1)
-const limit = ref<number>(20)
+const limit = ref<number>(10)
 
 const fetchData = async (page: number, limit: number) => {
   loading.value = true
