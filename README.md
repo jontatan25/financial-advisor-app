@@ -1,6 +1,8 @@
 # ReportINC - Financial Report Solution
 Welcome to ReportINC, your comprehensive financial report solution. This front end application is designed to provide users with insightful analytics and management tools for their investments.
 
+###### Note: The ideal resolution for using this application is 1920x1080. Support for other resolutions is yet to be implemented.
+
 ## Project Overview
 ReportINC utilizes Vue.js as the frontend framework along with various libraries and components to visualize and manage financial data effectively.
 
